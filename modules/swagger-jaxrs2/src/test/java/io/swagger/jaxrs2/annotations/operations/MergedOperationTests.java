@@ -15,23 +15,13 @@ import javax.ws.rs.QueryParam;
 import static org.testng.Assert.assertEquals;
 
 public class MergedOperationTests extends AbstractAnnotationTest {
-    @Test(enabled = false, description = "shows a response when no annotation is present")
+    @Test(description = "shows a response when no annotation is present")
     public void testUnannotatedMethod() {
         String yaml = readIntoYaml(UnannotatedMethodClass.class);
 
         assertEquals(yaml,
-                "get:\n" +
-                        "  operationId: getSimpleResponse\n" +
-                        "  parameters: []\n" +
-                        "  responses:\n" +
-                        "    default:\n" +
-                        "      content:\n" +
-                        "        */*:\n" +
-                        "          schema:\n" +
-                        "            type: object\n" +
-                        "            properties:\n" +
-                        "              id:\n" +
-                        "                type: string\n");
+                "---\n" +
+                        "openapi: 3.0.0-rc2\n");
     }
 
     static class UnannotatedMethodClass {
